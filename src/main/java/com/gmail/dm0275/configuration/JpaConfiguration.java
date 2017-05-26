@@ -2,6 +2,8 @@ package com.gmail.dm0275.configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.dialect.H2Dialect;
+import org.hibernate.engine.jdbc.env.internal.DefaultSchemaNameResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
@@ -31,12 +33,12 @@ public class JpaConfiguration {
     @Autowired
     private Environment environment;
 
-    @Value("${datasource.sampleApp.maxPoolSize:10}")
+    @Value("${datasource.sampleapp.maxPoolSize:10}")
     private int maxPoolSize;
 
     @Bean
     @Primary
-    @ConfigurationProperties(prefix = "datasource.sampleApp")
+    @ConfigurationProperties(prefix = "datasource.sampleapp")
     public DataSourceProperties dataSourceProperties() {
         return new DataSourceProperties();
     }
@@ -61,7 +63,7 @@ public class JpaConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
-        factoryBean.setPackagesToScan("com.gmail.dm0275");
+        factoryBean.setPackagesToScan("com.gmail.dm0275.model");
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaProperties(jpaProperties());
         return factoryBean;
@@ -75,12 +77,12 @@ public class JpaConfiguration {
 
     private Properties jpaProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", environment.getRequiredProperty("datasource.sampleApp.hibernate.dialect"));
-        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("datasource.sampleApp.hibernate.hbm2ddl.method"));
-        properties.put("hibernate.show_sql", environment.getRequiredProperty("datasource.sampleApp.hibernate.show_sql"));
-        properties.put("hibernate.format_sql", environment.getRequiredProperty("datasource.sampleApp.hibernate.format_sql"));
-        if (StringUtils.isNotEmpty(environment.getRequiredProperty("datasource.sampleApp.hibernate.defaultSchema"))) {
-            properties.put("hibernate.default_schema", environment.getRequiredProperty("datasource.sampleApp.hibernate.defaultSchema"));
+        properties.put("hibernate.dialect", environment.getRequiredProperty("datasource.sampleapp.hibernate.dialect"));
+        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("datasource.sampleapp.hibernate.hbm2ddl.method"));
+        properties.put("hibernate.show_sql", environment.getRequiredProperty("datasource.sampleapp.hibernate.show_sql"));
+        properties.put("hibernate.format_sql", environment.getRequiredProperty("datasource.sampleapp.hibernate.format_sql"));
+        if (StringUtils.isNotEmpty(environment.getRequiredProperty("datasource.sampleapp.hibernate.defaultSchema"))) {
+            properties.put("hibernate.default_schema", environment.getRequiredProperty("datasource.sampleapp.hibernate.defaultSchema"));
         }
         return properties;
     }
