@@ -8,13 +8,13 @@
 
     <body>
         <div ui-view>
-            <script src="js/lib/angular.min.js"/>
-            <script src="js/lib/angular-ui-router.min.js"/>
-            <script src="js/lib/localforage.min.js"/>
-            <script src="js/lib/ngStorage.min.js"/>
-            <script src="js/app/app.js"/>
-            <script src="js/app/UserService.js"/>
-            <script src="js/app/UserController.js"/>
+            <script src="js/lib/angular.min.js" ></script>
+            <script src="js/lib/angular-ui-router.min.js" ></script>
+            <script src="js/lib/localforage.min.js" ></script>
+            <script src="js/lib/ngStorage.min.js"></script>
+            <script src="js/app.js"></script>
+            <script src="js/UserService.js"></script>
+            <script src="js/UserController.js"></script>
         </div>
     </body>
 </html>
